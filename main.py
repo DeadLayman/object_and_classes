@@ -18,9 +18,20 @@ class Student:
         else:
             return 'Ошибка'
 
+    def _average_rate_student(self):
+        rate = []
+        if len(self.grades) != 0:
+            for grade in self.grades.values():
+                rate.extend(grade)
+            return '%.1f' % (sum(rate) / len(rate))
+        else:
+            return rate
+
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname} \nСредняя оценка за домашние задания: ' \
-               f'\nКурсы в процессе изучения: {self.courses_in_progress} \nЗавершенные курсы: {self.finished_courses}'
+        return f'Имя: {self.name}\nФамилия: {self.surname} ' \
+               f'\nСредняя оценка за домашние задания: {self._average_rate_student()}' \
+               f'\nКурсы в процессе изучения: {", ".join(self.courses_in_progress)} ' \
+               f'\nЗавершенные курсы: {", ".join(self.finished_courses)}'
 
 
 class Mentor:
@@ -35,8 +46,17 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.lector_grades = {}
 
+    def _average_rate_lector(self):
+        rate = []
+        if len(self.lector_grades) != 0:
+            for grade in self.lector_grades.values():
+                rate.extend(grade)
+            return '%.1f' % (sum(rate) / len(rate))
+        else:
+            return rate
+
     def __str__(self):
-        return f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: '
+        return f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: {self._average_rate_lector()}'
 
 
 class Reviewer(Mentor):
