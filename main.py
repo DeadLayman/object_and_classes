@@ -25,7 +25,12 @@ class Student:
                 rate.extend(grade)
             return '%.1f' % (sum(rate) / len(rate))
         else:
-            return rate
+            return 'Оценок нет'
+
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            return self._average_rate_student() < other._average_rate_student()
+        return f'{other.name} не является студентом'
 
     def __str__(self):
         return f'Имя: {self.name}\nФамилия: {self.surname} ' \
@@ -53,7 +58,12 @@ class Lecturer(Mentor):
                 rate.extend(grade)
             return '%.1f' % (sum(rate) / len(rate))
         else:
-            return rate
+            return 'Оценок нет'
+
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            return self._average_rate_lector() < other._average_rate_lector()
+        return f'{other.name} не является лектором'
 
     def __str__(self):
         return f'Имя: {self.name} \nФамилия: {self.surname} \nСредняя оценка за лекции: {self._average_rate_lector()}'
